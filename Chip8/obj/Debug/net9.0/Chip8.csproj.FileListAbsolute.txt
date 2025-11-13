@@ -12,3 +12,4 @@
 /Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.pdb
 /Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.genruntimeconfig.cache
 /Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/ref/Chip8.dll
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.sourcelink.json
