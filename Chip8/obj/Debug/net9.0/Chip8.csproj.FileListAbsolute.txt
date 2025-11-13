@@ -1,0 +1,14 @@
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/bin/Debug/net9.0/Chip8
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/bin/Debug/net9.0/Chip8.deps.json
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/bin/Debug/net9.0/Chip8.runtimeconfig.json
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/bin/Debug/net9.0/Chip8.dll
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/bin/Debug/net9.0/Chip8.pdb
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.GeneratedMSBuildEditorConfig.editorconfig
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.AssemblyInfoInputs.cache
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.AssemblyInfo.cs
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.csproj.CoreCompileInputs.cache
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.dll
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/refint/Chip8.dll
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.pdb
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/Chip8.genruntimeconfig.cache
+/Users/youaawd.hikalfocalcube.com/RiderProjects/Chip8/Chip8/obj/Debug/net9.0/ref/Chip8.dll
