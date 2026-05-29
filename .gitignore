@@ -1,0 +1,10 @@
+﻿# JetBrains Rider
+.idea/
+
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Logs
+*.log
+
