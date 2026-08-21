@@ -1,0 +1,79 @@
+@using Chip8.Core
+@implements IDisposable
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<div class="machine">
+    <header>
+        <h1>CHIP-8</h1>
+        <span class="subtitle">emulator · C# on WebAssembly</span>
+    </header>
+
+    <div class="controls">
+        <label for="rom-select">ROM</label>
+        <select id="rom-select" value="@_currentRom" @onchange="OnRomChanged">
+            <option value="heart_monitor.ch8">Heart Monitor</option>
+            <option value="ibm_logo.ch8">IBM Logo</option>
+        </select>
+        <button @onclick="ResetAsync">Reset</button>
+    </div>
+
+    <div class="screen-bezel">
+        <canvas id="chip8-screen" width="640" height="320"></canvas>
+        <div class="scanlines"></div>
+    </div>
+
+    <footer>
+        <p>Keys: <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> — mapped to the CHIP-8 hex keypad</p>
+        <p><a href="https://github.com/Youssefhikal93/CHIP-8-emulator" target="_blank" rel="noopener">Source on GitHub</a></p>
+    </footer>
+</div>
+
+@code {
+    private CPU _cpu = new();
+    private string _currentRom = "heart_monitor.ch8";
+    private DotNetObjectReference<App>? _selfRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+
+        await LoadRomAsync(_currentRom);
+        _selfRef = DotNetObjectReference.Create(this);
+        await JS.InvokeVoidAsync("chip8.start", _selfRef);
+    }
+
+    // Called by JS once per animation frame with the current key bitmask.
+    [JSInvokable]
+    public FrameResult Tick(int keys)
+    {
+        _cpu.Keys = (ushort)keys;
+
+        for (int i = 0; i < 10; i++)
+            _cpu.Step();
+
+        if (_cpu.DelayTimer > 0) _cpu.DelayTimer--;
+        if (_cpu.SoundTimer > 0) _cpu.SoundTimer--;
+
+        return new FrameResult(_cpu.Display, _cpu.SoundTimer > 0);
+    }
+
+    private async Task OnRomChanged(ChangeEventArgs e)
+    {
+        _currentRom = e.Value?.ToString() ?? _currentRom;
+        await LoadRomAsync(_currentRom);
+    }
+
+    private Task ResetAsync() => LoadRomAsync(_currentRom);
+
+    private async Task LoadRomAsync(string name)
+    {
+        var rom = await Http.GetByteArrayAsync($"roms/{name}");
+        _cpu = new CPU();
+        _cpu.LoadProgram(rom);
+    }
+
+    public void Dispose() => _selfRef?.Dispose();
+
+    public record FrameResult(byte[] Display, bool Beep);
+}

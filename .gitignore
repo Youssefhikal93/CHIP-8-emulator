@@ -8,3 +8,8 @@
 # Logs
 *.log
 
+
+# Local tooling
+.claude/
+.playwright-mcp/
+.DS_Store
