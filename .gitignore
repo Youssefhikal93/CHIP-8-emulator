@@ -13,3 +13,7 @@
 .claude/
 .playwright-mcp/
 .DS_Store
+
+# Visual Studio
+.vs/
+*.csproj.user
