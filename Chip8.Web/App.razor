@@ -12,11 +12,14 @@
     <div class="controls">
         <label for="rom-select">ROM</label>
         <select id="rom-select" value="@_currentRom" @onchange="OnRomChanged">
-            <option value="heart_monitor.ch8">Heart Monitor</option>
-            <option value="ibm_logo.ch8">IBM Logo</option>
+            @foreach (var rom in Roms)
+            {
+                <option value="@rom.File">@rom.Name</option>
+            }
         </select>
         <button @onclick="ResetAsync">Reset</button>
     </div>
+    <p class="rom-hint">@CurrentRomInfo.Hint</p>
 
     <div class="screen-bezel">
         <canvas id="chip8-screen" width="640" height="320"></canvas>
@@ -24,14 +27,30 @@
     </div>
 
     <footer>
-        <p>Keys: <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> — mapped to the CHIP-8 hex keypad</p>
+        <p>The original CHIP-8 (1977) used a 16-button hex keypad — here <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> <kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd> <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> <kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd> stand in for it. See each game's hint above for what its keys do.</p>
         <p><a href="https://github.com/Youssefhikal93/CHIP-8-emulator" target="_blank" rel="noopener">Source on GitHub</a></p>
     </footer>
 </div>
 
 @code {
+    private record RomInfo(string File, string Name, string Hint);
+
+    private static readonly RomInfo[] Roms =
+    {
+        new("heart_monitor.ch8", "Heart Monitor",   "Demo — an animated EKG trace. No controls."),
+        new("ibm_logo.ch8",      "IBM Logo",        "Demo — the classic emulator test ROM. No controls."),
+        new("maze.ch8",          "Maze (1991)",     "Demo — generates an endless random maze. No controls."),
+        new("pong.ch8",          "Pong (1990)",     "1 = paddle up, Q = paddle down. First to 9 wins."),
+        new("brix.ch8",          "Brix (1990)",     "Q = move left, E = move right. Clear all the bricks!"),
+        new("tetris.ch8",        "Tetris (1991)",   "W = left, E = right, Q = rotate, 1 = drop."),
+        new("invaders.ch8",      "Space Invaders",  "W = start / shoot, Q = left, E = right."),
+        new("ufo.ch8",           "UFO (1977)",      "Q / W / E = shoot left / up / right. 15 missiles."),
+    };
+
     private CPU _cpu = new();
     private string _currentRom = "heart_monitor.ch8";
+
+    private RomInfo CurrentRomInfo => Roms.First(r => r.File == _currentRom);
     private DotNetObjectReference<App>? _selfRef;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

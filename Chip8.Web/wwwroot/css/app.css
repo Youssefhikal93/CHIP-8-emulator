@@ -70,6 +70,14 @@ header .subtitle {
     box-shadow: 0 0 8px rgba(232, 200, 90, 0.35);
 }
 
+.rom-hint {
+    margin: 0 0 0.9rem;
+    font-size: 0.78rem;
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+    min-height: 1.2em;
+}
+
 .screen-bezel {
     position: relative;
     display: inline-block;
